@@ -3,4 +3,4 @@ data/*.jpg
 src/*.pyc
 dump/
 recognition/
-src/models/*
+src/models/*.dat

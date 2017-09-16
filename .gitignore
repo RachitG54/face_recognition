@@ -4,4 +4,5 @@ src/*.pyc
 dump/
 recognition/
 src/models/*.dat
+src/models/*.npy
 src/*.jpg

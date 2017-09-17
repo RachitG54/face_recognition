@@ -7,3 +7,5 @@ src/models/*.dat
 src/models/*.npy
 src/models/*.pb
 src/*.jpg
+src/*.obj
+src/*.log

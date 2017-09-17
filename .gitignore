@@ -5,4 +5,5 @@ dump/
 recognition/
 src/models/*.dat
 src/models/*.npy
+src/models/*.pb
 src/*.jpg

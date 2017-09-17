@@ -31,37 +31,42 @@ def rotate_point(pos, img, angle):
     newy = -x*sin(radians(angle)) + y*cos(radians(angle)) + img.shape[0]*0.4
     return int(newx), int(newy)
 
-file = '../data/lynk/100.jpg'
-# img = cv2.imread(file,cv2.IMREAD_COLOR)
-img = transform_img(cv2.imread(file,cv2.IMREAD_COLOR))
+def face_detect(file) :
 
-maxscore, maxangle = (-1,-1)
-eps = 0.05 
-detected_rect = None
+    # file = '../data/lynk/100.jpg'
+    # img = cv2.imread(file,cv2.IMREAD_COLOR)
+    img = transform_img(cv2.imread(file,cv2.IMREAD_COLOR))
 
-for angle in range(-90, 90, 15):
-    rimg = rotate_image(img, angle)
-    dets, scores, idx = detector.run(cv2.cvtColor(rimg, cv2.COLOR_BGR2GRAY), 1, -1)
-    if len(scores) : 
-        face_id = np.argmax(scores)
-        score = scores[face_id]
-        d = dets[face_id]
+    maxscore, maxangle = (-1,-1)
+    eps = 0.05 
+    detected_rect = None
 
-        # print 'score %g' % score
+    for angle in range(-90, 90, 15):
+        rimg = rotate_image(img, angle)
+        dets, scores, idx = detector.run(cv2.cvtColor(rimg, cv2.COLOR_BGR2GRAY), 1, -1)
+        if len(scores) : 
+            face_id = np.argmax(scores)
+            score = scores[face_id]
+            d = dets[face_id]
 
-        if(score > maxscore + eps):
-            maxangle = angle
-            maxscore = score
-            detected_rect = d
-            # print 'angle %g' %angle
+            # print 'score %g' % score
 
-rimg = rotate_image(img, maxangle)
-aligned_face = face_aligner.align(227, rimg, detected_rect, landmarkIndices=Align.OUTER_EYES_AND_NOSE)
+            if(score > maxscore + eps):
+                maxangle = angle
+                maxscore = score
+                detected_rect = d
+                # print 'angle %g' %angle
 
-print 'Max Score %g' % maxscore
-cv2.imwrite("aligned_face.jpg", aligned_face)
-win = dlib.image_window()
-win.clear_overlay()
-win.set_image(rimg)
-win.add_overlay(detected_rect)
-dlib.hit_enter_to_continue()
+    rimg = rotate_image(img, maxangle)
+    aligned_face = face_aligner.align(227, rimg, detected_rect, landmarkIndices=Align.OUTER_EYES_AND_NOSE)
+
+    # print 'Max Score %g' % maxscore
+    # cv2.imwrite("aligned_face.jpg", aligned_face)
+
+    return aligned_face, maxscore
+
+    # win = dlib.image_window()
+    # win.clear_overlay()
+    # win.set_image(rimg)
+    # win.add_overlay(detected_rect)
+    # dlib.hit_enter_to_continue()

@@ -142,10 +142,12 @@ fc7 = tf.nn.relu_layer(fc6, fc7W, fc7b)
 # prob = tf.nn.softmax(fc8)
 
 init = tf.global_variables_initializer()
-sess = tf.InteractiveSession()
-sess.run(init)
+sess_alexnet = tf.InteractiveSession()
+sess_alexnet.run(init)
 
-def feature_extract(img) :
+FEATURE_SIZE = 4096
+
+def face_feature_extract(img) :
   img = transform_img(img, img_width=IMAGE_WIDTH, img_height=IMAGE_HEIGHT)
   img = img.reshape((1, 227, 227, 3))
-  return sess.run(fc7, feed_dict = {x:img})[0]
+  return sess_alexnet.run(fc7, feed_dict = {x:img})[0]

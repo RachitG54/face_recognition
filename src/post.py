@@ -17,8 +17,10 @@ with open('FRmod_v1.obj', 'r') as filehandler :
 
 log_response = open('response.log', 'w')
 
+count = 1
 for file_name in glob.glob(data_dir+'*') :
-	print 'Predicting -- ',file_name
+	print 'Predicting -- ',file_name, ' -- ', count
+	count += 1
 	image_uid = file_name.split('/')[-1].split('.')[0]
 	# person_name = label_map[image_uid]
 
@@ -33,5 +35,5 @@ for file_name in glob.glob(data_dir+'*') :
 
 with open('output.json','w') as f :
 	f.write(json.dumps(output_json))
-	
+
 log_response.close()

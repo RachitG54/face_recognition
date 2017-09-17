@@ -11,8 +11,10 @@ with open('../data/labels.json') as f :
 
 fr = FaceRecognizer()
 
+count = 1
 for file_name in glob.glob(data_dir+'*') :
-	print 'Processing -- ',file_name
+	print 'Processing -- ',file_name, ' -- ', count
+	count += 1
 	image_uid = file_name.split('/')[-1].split('.')[0]
 	person_name = label_map[image_uid]
 

@@ -43,7 +43,7 @@ class classifyDB:
 		if (prob[face_id] > self.threshold) :
 			return self.name[face_id], prob[face_id]
 		else : 
-			None, None
+			return ('notfound', 0)
 
 	def add_to_DB(self, F, name, score=1, confidence=1) :
 		newbie = name not in self.name.values() 

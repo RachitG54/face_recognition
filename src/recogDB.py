@@ -32,9 +32,9 @@ class recogDB:
 
 		if(F_hat[index] > self.threshold):
 			self.add_to_DB(Ffeature, self.name[index], score=score, confidence=F_hat[index])
-			return self.name[index]
+			return self.name[index], F_hat[index]
 		else:
-			return None
+			return ('notfound', 0)
 
 	def add_to_DB(self, F, name, score=1, confidence=1) :
 		newbie = name not in self.name.values() 

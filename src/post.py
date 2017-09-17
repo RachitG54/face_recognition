@@ -3,11 +3,14 @@ from FaceRecognizer import *
 import glob
 import pickle
 import requests
+import json
 
 data_dir = '../data/lynk/'
 
 verify_url = 'https://us-central1-lynkhacksmock.cloudfunctions.net/verifyface'
 team_name = 'NADS'
+
+output_json = []
 
 with open('FRmod_v1.obj', 'r') as filehandler :
  fr = pickle.load(filehandler) 
@@ -24,7 +27,11 @@ for file_name in glob.glob(data_dir+'*') :
 
 	data = {"teamname":team_name, "imageuid": image_uid, "name":guess}
 
-	r = requests.post(url, json)
-	log_response.write(r.text + '\n')
+	output_json.append(data)
+	# r = requests.post(verify_url, data)
+	# log_response.write(r.text + '\n')
 
+with open('output.json','w') as f :
+	f.write(json.dumps(output_json))
+	
 log_response.close()

@@ -32,7 +32,7 @@ for directory in glob.glob(data_dir+'*')[0:2] : #[0:(len(glob.glob(data_dir+'*')
 		if (im_id > 6) :
 			TEST_SIZE += 1
 			img, score = face_detect(imfile)
-			guess = fr.predict(img)
+			guess, confidence = fr.predict(img)
 			if (guess == person_name) :
 				CORRECT += 1
 

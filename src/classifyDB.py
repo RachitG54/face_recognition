@@ -21,7 +21,7 @@ class classifyDB:
 
 		self.name_inv = {}			# name to index
 		self.alpha = 0.9				# Moving average
-		self.threshold = 0.1
+		self.threshold = 0.16
 		self.num_people = 0
 
 	def train(self) :

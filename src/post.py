@@ -25,7 +25,7 @@ for file_name in glob.glob(data_dir+'*') :
 	# person_name = label_map[image_uid]
 
 	img, score = face_detect(file_name)
-	guess = fr.predict(img)
+	guess, confidence = fr.predict(img)
 
 	data = {"teamname":team_name, "imageuid": image_uid, "name":guess}
 
@@ -35,5 +35,6 @@ for file_name in glob.glob(data_dir+'*') :
 
 with open('output.json','w') as f :
 	f.write(json.dumps(output_json))
+# print output_json
 
 log_response.close()

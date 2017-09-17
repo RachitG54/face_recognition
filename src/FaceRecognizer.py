@@ -30,6 +30,8 @@ class FaceRecognizer :
 			
 			if confidence_inv3 >= confidence_alex :
 				guess = guess_inv3
+				confidence = confidence_inv3
 			else :
 				guess = guess_alex
-			return guess
+				confidence = confidence_alex
+			return guess, confidence
